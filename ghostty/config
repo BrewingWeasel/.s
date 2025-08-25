@@ -1,0 +1,15 @@
+command = /opt/homebrew/bin/fish
+theme = rose-pine-moon
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+l=goto_split:right
+keybind = ctrl+j=goto_split:down
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+n=new_split:auto
+keybind = ctrl+f=toggle_split_zoom
+keybind = ctrl+q=close_surface
+
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = cmd+shift+r=reload_config
+
+keybind = option+q=new_window

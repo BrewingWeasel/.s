@@ -1,0 +1,12 @@
+*
+!.gitignore
+!nvim
+!nvim/**
+!ghostty
+!ghostty/**
+!fish
+!fish/**
+fish/fish_variables
+fish/completions
+fish/themes
+fish/functions
