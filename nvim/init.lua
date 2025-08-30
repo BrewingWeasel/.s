@@ -38,6 +38,8 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.cmp" },
 
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/zbirenbaum/copilot.lua" },
+	{ src = "https://github.com/giuxtaposition/blink-cmp-copilot" },
 })
 
 vim.cmd.colorscheme("rose-pine-moon")
@@ -107,13 +109,29 @@ bind("n", "<leader>ca", vim.lsp.buf.code_action)
 
 vim.diagnostic.config({ virtual_text = true, severity_sort = true, signs = false })
 
+require("copilot").setup({
+	suggestion = { enabled = false },
+	panel = { enabled = false },
+})
+
 require("blink.cmp").setup({
 	keymap = { preset = 'enter' },
 	fuzzy = {
 		prebuilt_binaries = {
 			force_version = "v1.6.0"
 		}
-	}
+	},
+	sources = {
+		default = { "lsp", "path", "snippets", "buffer", "copilot" },
+		providers = {
+			copilot = {
+				name = "copilot",
+				module = "blink-cmp-copilot",
+				score_offset = 100,
+				async = true,
+			},
+		},
+	},
 })
 
 local win_config = function()
