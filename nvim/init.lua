@@ -57,20 +57,20 @@ require("nvim-treesitter.configs").setup({
 })
 
 vim.api.nvim_create_autocmd('PackChanged', {
-  desc = 'Handle nvim-treesitter updates',
-  group = vim.api.nvim_create_augroup('nvim-treesitter-pack-changed-update-handler', { clear = true }),
-  callback = function(event)
-    if event.data.kind == 'update' then
-      vim.notify('nvim-treesitter updated, running TSUpdate...', vim.log.levels.INFO)
-      ---@diagnostic disable-next-line: param-type-mismatch
-      local ok = pcall(vim.cmd, 'TSUpdate')
-      if ok then
-        vim.notify('TSUpdate completed successfully!', vim.log.levels.INFO)
-      else
-        vim.notify('TSUpdate command not available yet, skipping', vim.log.levels.WARN)
-      end
-    end
-  end,
+	desc = 'Handle nvim-treesitter updates',
+	group = vim.api.nvim_create_augroup('nvim-treesitter-pack-changed-update-handler', { clear = true }),
+	callback = function(event)
+		if event.data.kind == 'update' then
+			vim.notify('nvim-treesitter updated, running TSUpdate...', vim.log.levels.INFO)
+			---@diagnostic disable-next-line: param-type-mismatch
+			local ok = pcall(vim.cmd, 'TSUpdate')
+			if ok then
+				vim.notify('TSUpdate completed successfully!', vim.log.levels.INFO)
+			else
+				vim.notify('TSUpdate command not available yet, skipping', vim.log.levels.WARN)
+			end
+		end
+	end,
 })
 
 require("mason").setup()
@@ -79,11 +79,14 @@ require('mason-tool-installer').setup({
 	ensure_installed = {
 		"lua_ls",
 		"stylua",
+		"biome",
+		"basedpyright",
+		"ruff",
 	}
 })
 
 vim.lsp.enable({
-	"lua_ls", "gleam",
+	"lua_ls", "gleam", "vtsls", "biome", "basedpyright",
 })
 
 vim.lsp.config("lua_ls", {
